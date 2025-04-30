@@ -91,33 +91,6 @@ cd8_image = qptiff.read_region('CD8')
 markers = qptiff.read_region(['DAPI', 'CD8', 'PD-L1'])
 ```
 
-### Cell Segmentation
-
-```python
-from qptiff import QPTiffFile, MultiplexedCellSegmenter
-
-# Open a QPTIFF file
-qptiff = QPTiffFile('example_image.qptiff')
-
-# Create a cell segmenter
-segmenter = MultiplexedCellSegmenter(
-    qptiff_file=qptiff,
-    nuclear_markers=['DAPI', 'Ki67'],
-    cytoplasmic_markers=['CK', 'CD45'],
-    membrane_markers=['HER2', 'PD-L1']
-)
-
-# Run the segmentation pipeline
-results = segmenter.run_nuclear_pipeline(visualize_steps=True)
-
-# Get segmentation as label image
-nuclei_labels = results['nuclei_labels']
-
-# Evaluate segmentation quality
-metrics = segmenter.evaluate_segmentation()
-print(metrics)
-```
-
 ### Working with Regions of Interest
 
 ```python
