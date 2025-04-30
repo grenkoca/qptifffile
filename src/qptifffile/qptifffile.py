@@ -38,7 +38,6 @@ class QPTiffFile(TiffFile):
         self.fluorophores = []
         self.channel_info = []
 
-        # Only process if we have pages to process
         if not hasattr(self, 'series') or len(self.series) == 0 or len(self.series[0].pages) == 0:
             return
 
@@ -250,13 +249,11 @@ class QPTiffFile(TiffFile):
 
             # Use page.asarray() with optional parameters to read only the required region
             # This is memory-efficient as it only reads the requested region
-            # Note: Some TIFF libraries might not support reading regions directly,
-            # in which case we'd need to implement a different approach
+            # Note: Some TIFF libraries might not support reading regions directly
             try:
                 # First try direct region reading if supported by the library
                 region = page.asarray(region=(y, x, y + height, x + width))
             except (TypeError, AttributeError, NotImplementedError):
-                # Fallback: If direct region reading is not supported, we need a workaround
                 # This approach uses memory mapping when possible to minimize memory usage
                 full_page = page.asarray(out='memmap')
                 region = full_page[y:y + height, x:x + width].copy()
