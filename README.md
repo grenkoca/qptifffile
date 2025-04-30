@@ -15,13 +15,14 @@ QPTiffFile provides tools for reading, processing, and analyzing QPTIFF image fi
 
 ## Installation
 
-### From PyPI (Recommended)
+### From PyPI (Coming soon)
 
 ```bash
 pip install qptifffile
 ```
 
-### From Source
+
+### From Source (The only way currently)
 
 ```bash
 git clone https://github.com/grenkoca/qptifffile.git
@@ -111,12 +112,6 @@ overview = qptiff.read_region(
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ## License
 
