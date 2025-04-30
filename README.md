@@ -1,0 +1,170 @@
+# QPTiffFile
+
+A Python package for working with Quantitative Phase TIFF (QPTIFF) files, commonly used in multiplex imaging and digital pathology.
+
+[![PyPI version](https://badge.fury.io/py/qptifffile.svg)](https://badge.fury.io/py/qptifffile)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Overview
+
+QPTiffFile provides tools for reading, processing, and analyzing QPTIFF image files. The package offers:
+
+- Automatic extraction of biomarker/fluorophore information
+- Memory-efficient tools for extracting regions of interest from large images
+- Support for multi-channel and multi-resolution imagery
+
+## Installation
+
+### From PyPI (Recommended)
+
+```bash
+pip install qptifffile
+```
+
+### From Conda
+
+```bash
+conda install -c grenkoca qptifffile
+```
+
+### From Source
+
+```bash
+git clone https://github.com/grenkoca/qptifffile.git
+cd qptifffile
+pip install -e .
+```
+
+## System Requirements
+
+For full functionality including compressed TIFF support, you'll need:
+
+### macOS
+
+```bash
+# For Apple Silicon
+brew install libaec
+
+# For Intel Macs
+brew install libaec
+```
+
+### Linux
+
+```bash
+# Ubuntu/Debian
+sudo apt-get install libaec-dev
+
+# CentOS/RHEL
+sudo yum install libaec-devel
+```
+
+## Dependencies
+
+Core dependencies:
+
+- tifffile
+- numpy
+
+Optional dependencies:
+
+- imagecodecs (recommended for compressed TIFF support)
+
+## Usage Examples
+
+### Basic QPTIFF File Reading
+
+```python
+from qptiff import QPTiffFile
+
+# Open a QPTIFF file
+qptiff = QPTiffFile('example_image.qptiff')
+
+# Display available biomarkers
+print(qptiff.get_biomarkers())
+
+# Print summary of all channels
+qptiff.print_channel_summary()
+
+# Read specific biomarker channels
+dapi_image = qptiff.read_region('DAPI')
+cd8_image = qptiff.read_region('CD8')
+
+# Read multiple biomarkers
+markers = qptiff.read_region(['DAPI', 'CD8', 'PD-L1'])
+```
+
+### Cell Segmentation
+
+```python
+from qptiff import QPTiffFile, MultiplexedCellSegmenter
+
+# Open a QPTIFF file
+qptiff = QPTiffFile('example_image.qptiff')
+
+# Create a cell segmenter
+segmenter = MultiplexedCellSegmenter(
+    qptiff_file=qptiff,
+    nuclear_markers=['DAPI', 'Ki67'],
+    cytoplasmic_markers=['CK', 'CD45'],
+    membrane_markers=['HER2', 'PD-L1']
+)
+
+# Run the segmentation pipeline
+results = segmenter.run_nuclear_pipeline(visualize_steps=True)
+
+# Get segmentation as label image
+nuclei_labels = results['nuclei_labels']
+
+# Evaluate segmentation quality
+metrics = segmenter.evaluate_segmentation()
+print(metrics)
+```
+
+### Working with Regions of Interest
+
+```python
+# Extract a specific region (x, y starting position and width, height)
+region = qptiff.read_region(
+    layers=['DAPI', 'CD8', 'PD-L1'],
+    pos=(1000, 2000),
+    shape=(500, 500)
+)
+
+# Work with lower resolution pyramid levels
+overview = qptiff.read_region(
+    layers=['DAPI'],
+    series_index=1  # Lower resolution pyramid level
+)
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Citation
+
+If you use this software in your research, please cite:
+
+```
+@software{qptifffile,
+  author = {Grenko, Caleb},
+  title = {QPTiffFile: A Python package for working with Quantitative Phase TIFF files},
+  url = {https://github.com/grenkoca/qptifffile},
+  year = {2025},
+}
+```
+
+## Acknowledgments
+
+- Based on the excellent [tifffile](https://github.com/cgohlke/tifffile) library by Christoph Gohlke

@@ -1,0 +1,10 @@
+README.md
+pyproject.toml
+setup.cfg
+src/qptifffile/__init__.py
+src/qptifffile/qptifffile.py
+src/qptifffile.egg-info/PKG-INFO
+src/qptifffile.egg-info/SOURCES.txt
+src/qptifffile.egg-info/dependency_links.txt
+src/qptifffile.egg-info/requires.txt
+src/qptifffile.egg-info/top_level.txt
