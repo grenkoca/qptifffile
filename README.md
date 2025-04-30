@@ -21,12 +21,6 @@ QPTiffFile provides tools for reading, processing, and analyzing QPTIFF image fi
 pip install qptifffile
 ```
 
-### From Conda
-
-```bash
-conda install -c grenkoca qptifffile
-```
-
 ### From Source
 
 ```bash
@@ -48,6 +42,9 @@ brew install libaec
 # For Intel Macs
 brew install libaec
 ```
+
+_note: on Apple Silicon chips, you may need to install libaec via conda: https://anaconda.org/conda-forge/libaec/_
+
 
 ### Linux
 
