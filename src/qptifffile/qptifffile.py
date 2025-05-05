@@ -38,6 +38,7 @@ class QPTiffFile(TiffFile):
         self.fluorophores = []
         self.channel_info = []
 
+        # Only process if we have pages to process
         if not hasattr(self, 'series') or len(self.series) == 0 or len(self.series[0].pages) == 0:
             return
 
@@ -157,7 +158,7 @@ class QPTiffFile(TiffFile):
                     layers: Union[str, Iterable[str], int, Iterable[int], None] = None,
                     pos: Union[Tuple[int, int], None] = None,
                     shape: Union[Tuple[int, int], None] = None,
-                    series_index: int = 0):
+                    level: int = 0):
         """
         Read a region from the QPTIFF file for specified layers.
 
@@ -170,8 +171,8 @@ class QPTiffFile(TiffFile):
             (x, y) starting position. If None, starts at (0, 0).
         shape : Tuple[int, int] or None
             (width, height) of the region. If None, reads the entire image.
-        series_index : int
-            Index of the series to read from (default: 0).
+        level : int
+            Index of the level to read from (default: 0).
 
         Returns:
         --------
@@ -182,13 +183,13 @@ class QPTiffFile(TiffFile):
         import numpy as np
 
         # Handle series selection
-        if not isinstance(series_index, int):
-            series_index = int(series_index)
+        if not isinstance(level, int):
+            level = int(level)
 
-        if series_index >= len(self.series):
-            raise ValueError(f"Series index {series_index} out of range (max: {len(self.series) - 1})")
+        if level >= len(self.series[0].levels):
+            raise ValueError(f"Series index {level} out of range (max: {len(self.series) - 1})")
 
-        series = self.series[series_index]
+        series = self.series[0].levels[level]
 
         # Get the first page to determine image dimensions
         first_page = series.pages[0]
@@ -249,11 +250,13 @@ class QPTiffFile(TiffFile):
 
             # Use page.asarray() with optional parameters to read only the required region
             # This is memory-efficient as it only reads the requested region
-            # Note: Some TIFF libraries might not support reading regions directly
+            # Note: Some TIFF libraries might not support reading regions directly,
+            # in which case we'd need to implement a different approach
             try:
                 # First try direct region reading if supported by the library
                 region = page.asarray(region=(y, x, y + height, x + width))
             except (TypeError, AttributeError, NotImplementedError):
+                # Fallback: If direct region reading is not supported, we need a workaround
                 # This approach uses memory mapping when possible to minimize memory usage
                 full_page = page.asarray(out='memmap')
                 region = full_page[y:y + height, x:x + width].copy()
