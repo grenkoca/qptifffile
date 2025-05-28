@@ -34,6 +34,8 @@ pip install -e .
 
 Example .qptiff files are supplied by Akoya Biosciences (formerly owned by Perkin-Elmer): [link](https://downloads.openmicroscopy.org/images/Vectra-QPTIFF/perkinelmer/PKI_scans/)
 
+Additionally, a .qptiff file specification document can be found here: [link](https://downloads.openmicroscopy.org/images/Vectra-QPTIFF/perkinelmer/PKI_Image%20Format.docx) 
+
 ## System Requirements
 
 For full functionality including compressed TIFF support, you'll need:
