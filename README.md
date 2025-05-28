@@ -15,14 +15,14 @@ QPTiffFile provides tools for reading, processing, and analyzing QPTIFF image fi
 
 ## Installation
 
-### From PyPI (Coming soon)
+### From PyPI
 
 ```bash
 pip install qptifffile
 ```
 
 
-### From Source (The only way currently)
+### From Source
 
 ```bash
 git clone https://github.com/grenkoca/qptifffile.git
