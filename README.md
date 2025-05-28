@@ -128,6 +128,10 @@ If you use this software in your research, please cite:
 }
 ```
 
+## Contact
+
+The best way to get in touch is via email: grenko.caleb (at) mayo.edu
+
 ## Acknowledgments
 
 - Based on the excellent [tifffile](https://github.com/cgohlke/tifffile) library by Christoph Gohlke
