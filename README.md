@@ -105,7 +105,7 @@ region = qptiff.read_region(
 # Work with lower resolution pyramid levels
 overview = qptiff.read_region(
     layers=['DAPI'],
-    series_index=1  # Lower resolution pyramid level
+    level=1  # Lower resolution pyramid level
 )
 ```
 
