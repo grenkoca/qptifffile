@@ -122,7 +122,7 @@ If you use this software in your research, please cite:
 ```
 @software{qptifffile,
   author = {Grenko, Caleb},
-  title = {QPTiffFile: A Python package for working with Quantitative Phase TIFF files},
+  title = {QPTiffFile: A Python package for working with Vectra/Akoya QPTIFF files},
   url = {https://github.com/grenkoca/qptifffile},
   year = {2025},
 }
