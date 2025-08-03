@@ -100,20 +100,67 @@ markers = qptiff.read_region(['DAPI', 'CD8', 'PD-L1'])
 
 ### Working with Regions of Interest
 
-```python
-# Extract a specific region (x, y starting position and width, height)
-region = qptiff.read_region(
-    layers=['DAPI', 'CD8', 'PD-L1'],
-    pos=(1000, 2000),
-    shape=(500, 500)
-)
+```{python}
+In [1]: from qptifffile import QPTiffFile
 
-# Work with lower resolution pyramid levels
-overview = qptiff.read_region(
-    layers=['DAPI'],
-    level=1  # Lower resolution pyramid level
-)
+In [2]: f = QPTiffFile('../Phenocycler/Data/slides/Scan1.qptiff')
+
+In [3]: f.read_region('DAPI')
+Out[3]: 
+memmap([[0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        ...,
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0]], dtype=uint8)
 ```
+You can also do more complex calls by specifying:
+
+    a set of multiple channels by name (layers)
+    various x/y locations (pos) or subregions (shape)
+    different downsampled levels in the image pyramid (level)
+
+```{python}
+In [4]: f.read_region(
+    ...:     layers=['DAPI', 'CD8', 'Ki67'],
+    ...:     pos=(500, 1000),
+    ...:     shape=(500, 500),
+    ...:     level=2
+    ...: )
+Out[4]: 
+array([[[0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+        ...,
+        [5, 0, 0],
+        [2, 0, 0],
+        [1, 0, 0]],
+
+       [[0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+        ...,
+        [1, 0, 0],
+        [1, 0, 0],
+        [1, 0, 0]]], dtype=uint8)
+[output truncated by user]
+```
+and the memmap objects can be easily plugged into other methods that accept array-like objects, such as displaying in matplotlib:
+
+```{python}
+In [5]: import matplotlib.pyplot as plt
+In [5]: img = f.read_region(
+    ...:     layers=['DAPI'],
+    ...:     shape=(500, 500),
+    ...:     level=4)
+
+In [6]: plt.imshow(img, cmap='gray')
+Out[6]: <matplotlib.image.AxesImage at 0x12bcc8cb0>
+
+In [7]: plt.show()
+```
+
 
 ## Citation
 
