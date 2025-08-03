@@ -160,7 +160,7 @@ Out[6]: <matplotlib.image.AxesImage at 0x12bcc8cb0>
 
 In [7]: plt.show()
 ```
-
+<img src=https://github.com/grenkoca/qptifffile/blob/main/.imgs/image.jpg width="50%">
 
 ## Citation
 
