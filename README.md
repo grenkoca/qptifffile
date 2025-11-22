@@ -1,6 +1,6 @@
 # QPTiffFile
 
-A Python package for working with Quantitative Phase TIFF (QPTIFF) files, commonly used in multiplex imaging and digital pathology.
+A Python package for working with .qptiff files which are used in multiplexed fluorescence imaging.
 
 [![PyPI version](https://badge.fury.io/py/qptifffile.svg)](https://badge.fury.io/py/qptifffile)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
