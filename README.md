@@ -13,6 +13,28 @@ QPTiffFile provides tools for reading, processing, and analyzing QPTIFF image fi
 - Memory-efficient tools for extracting regions of interest from large images
 - Support for multi-channel and multi-resolution imagery
 
+### Basic Usage
+
+```python
+from qptifffile import QPTiffFile
+
+# Open a QPTIFF file
+qptiff = QPTiffFile('example_image.qptiff')
+
+# Display available biomarkers
+print(qptiff.get_biomarkers())
+
+# Print summary of all channels
+qptiff.print_channel_summary()
+
+# Read specific biomarker channels
+dapi_image = qptiff.read_region('DAPI')
+cd8_image = qptiff.read_region('CD8')
+
+# Read multiple biomarkers
+markers = qptiff.read_region(['DAPI', 'CD8', 'PD-L1'])
+```
+
 ## Installation
 
 ### From PyPI
@@ -29,13 +51,6 @@ git clone https://github.com/grenkoca/qptifffile.git
 cd qptifffile
 pip install -e .
 ```
-
-## Example images
-
-Example .qptiff files are supplied by Akoya Biosciences (formerly owned by Perkin-Elmer): [link](https://downloads.openmicroscopy.org/images/Vectra-QPTIFF/perkinelmer/PKI_scans/)
-
-Additionally, a .qptiff file specification document can be found here: [link](https://downloads.openmicroscopy.org/images/Vectra-QPTIFF/perkinelmer/PKI_Image%20Format.docx) 
-
 ## System Requirements
 
 For full functionality including compressed TIFF support, you'll need:
@@ -76,26 +91,10 @@ Optional dependencies:
 
 ## Usage Examples
 
-### Basic QPTIFF File Reading
-
-```python
-from qptiff import QPTiffFile
-
-# Open a QPTIFF file
-qptiff = QPTiffFile('example_image.qptiff')
-
-# Display available biomarkers
-print(qptiff.get_biomarkers())
-
-# Print summary of all channels
-qptiff.print_channel_summary()
-
-# Read specific biomarker channels
-dapi_image = qptiff.read_region('DAPI')
-cd8_image = qptiff.read_region('CD8')
-
-# Read multiple biomarkers
-markers = qptiff.read_region(['DAPI', 'CD8', 'PD-L1'])
+See [this link]([url](https://downloads.openmicroscopy.org/images/Vectra-QPTIFF/perkinelmer/PKI_scans/)) for publicly available PhenoCycler data:
+```{bash}
+# Or, pull an image directly:
+wget https://downloads.openmicroscopy.org/images/Vectra-QPTIFF/perkinelmer/PKI_scans/LuCa-7color_Scan1.qptiff
 ```
 
 ### Working with Regions of Interest
@@ -122,12 +121,14 @@ You can also do more complex calls by specifying:
     different downsampled levels in the image pyramid (level)
 
 ```{python}
+# Note, if your stains are named, you can refer to tehm as 
 In [4]: f.read_region(
-    ...:     layers=['DAPI', 'CD8', 'Ki67'],
+    ...:     layers=['DAPI', 'FITC', 'Texas Red'],
     ...:     pos=(500, 1000),
     ...:     shape=(500, 500),
     ...:     level=2
     ...: )
+# Will be a (x, y, # stains) array
 Out[4]: 
 array([[[0, 0, 0],
         [0, 0, 0],
