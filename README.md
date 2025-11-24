@@ -91,7 +91,7 @@ Optional dependencies:
 
 ## Usage Examples
 
-See [this link]([url](https://downloads.openmicroscopy.org/images/Vectra-QPTIFF/perkinelmer/PKI_scans/)) for publicly available PhenoCycler data:
+See [this link](https://downloads.openmicroscopy.org/images/Vectra-QPTIFF/perkinelmer/PKI_scans/) for publicly available PhenoCycler data:
 ```{bash}
 # Or, pull an image directly:
 wget https://downloads.openmicroscopy.org/images/Vectra-QPTIFF/perkinelmer/PKI_scans/LuCa-7color_Scan1.qptiff
