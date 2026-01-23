@@ -3,6 +3,7 @@
 A Python package for working with .qptiff files which are used in multiplexed fluorescence imaging.
 
 [![PyPI version](https://badge.fury.io/py/qptifffile.svg)](https://badge.fury.io/py/qptifffile)
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/qptifffile?period=total&units=INTERNATIONAL_SYSTEM&left_color=GRAY&right_color=BLUE&left_text=downloads)](https://pepy.tech/projects/qptifffile)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Overview
