@@ -1,7 +1,12 @@
 # QPTiffFile
 
-A Python package for working with .qptiff files which are used in multiplexed fluorescence imaging.
+> [!IMPORTANT]  
+> **This project has been migrated.** As of February 26, 2026, this repository is no longer maintained.
+> 
+> ### ➔ [View the new repository: mxtifffile](https://github.com/grenkoca/mxtifffile)
+> *Please use the new repo for cross-platform support and updated features.*
 
+---
 [![PyPI version](https://badge.fury.io/py/qptifffile.svg)](https://badge.fury.io/py/qptifffile)
 [![PyPI Downloads](https://static.pepy.tech/personalized-badge/qptifffile?period=total&units=INTERNATIONAL_SYSTEM&left_color=GRAY&right_color=BLUE&left_text=downloads)](https://pepy.tech/projects/qptifffile)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
